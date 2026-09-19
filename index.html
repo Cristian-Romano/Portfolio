@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cristian Gabriel Romano | Portafolio</title>
+    <!-- FontAwesome para los íconos de contacto -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ================= VARIABLES Y RESET ================= */
+        :root {
+            --bg-hero: #111827; 
+            --primary-color: #1e293b; 
+            --accent-color: #06b6d4; 
+            --text-dark: #334155;
+            --text-light: #f8fafc;
+            --bg-light: #f1f5f9;
+            --bg-white: #ffffff;
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= ANIMACIONES ================= */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================= NAVEGACIÓN ================= */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-light);
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: var(--bg-hero);
+            color: var(--text-light);
+            padding: 0 10%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        /* Botones de contacto estilo píldora */
+        .contact-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            background-color: transparent;
+            border: 1px solid #475569;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .contact-pill:hover {
+            border-color: var(--accent-color);
+            background-color: rgba(6, 182, 212, 0.1);
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .contact-pill i {
+            font-size: 1rem;
+        }
+
+        /* ================= SECCIONES COMUNES ================= */
+        section {
+            padding: 6rem 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin-top: 0.5rem;
+            border-radius: 2px;
+        }
+
+        /* ================= SOBRE MÍ ================= */
+        .about-content {
+            background-color: var(--bg-white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* ================= FORMACIÓN & EXPERIENCIA ================= */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .card .institution {
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* ================= HABILIDADES (ETIQUETAS) ================= */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background-color: #e2e8f0;
+            color: var(--text-dark);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 1px solid transparent;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--bg-white);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background-color: #1e293b;
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        footer p {
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            .hero { padding: 0 5%; text-align: center; align-items: center; }
+            .hero h1 { font-size: 2.5rem; }
+            .contact-pills { justify-content: center; }
+            .nav-links { display: none; }
+            section { padding: 4rem 5%; }
+            .section-title::after { margin: 0.5rem auto 0; }
+            .section-title { text-align: center; }
+            .about-content { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="nav-logo">CR</div>
+        <div class="nav-links">
+            <a href="#sobre-mi">Sobre Mí</a>
+            <a href="#formacion">Formación</a>
+            <a href="#experiencia">Experiencia</a>
+            <a href="#habilidades">Habilidades</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="fade-in">
+            <h1>Cristian Gabriel Romano</h1>
+            <h2>Estudiante de Derecho | Asistente Jurídico y Notarial</h2>
+            
+            <div class="contact-pills">
+                <a href="mailto:cristianromano544@gmail.com" class="contact-pill">
+                    <i class="fas fa-envelope"></i> cristianromano544@gmail.com
+                </a>
+                <a href="tel:+542214083812" class="contact-pill">
+                    <i class="fas fa-phone"></i> +54 221 4083812
+                </a>
+                <a href="https://www.linkedin.com/in/cristian-romano-04891926a/" target="_blank" rel="noopener noreferrer" class="contact-pill">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi">
+        <h2 class="section-title fade-in">Sobre Mí</h2>
+        <div class="about-content fade-in">
+            <p>Hola, soy Cristian. Estudio Derecho en la UNLP y me estoy formando como Asistente Jurídico y Notarial. Me considero con la capacidad de asistir en la organización y realización de las tareas administrativas generales del área. Tengo conocimientos de ofimática, así como la capacidad y disposición para trabajar con pares, superiores, equipos y comunidades de trabajo; integrando distintas perspectivas y aportes, y contribuyendo al éxito de los objetivos en común.</p>
+        </div>
+    </section>
+
+    <!-- Formación Académica -->
+    <section id="formacion">
+        <h2 class="section-title fade-in">Formación Académica</h2>
+        <div class="timeline">
+            <div class="card fade-in">
+                <h3>Abogacía</h3>
+                <div class="institution">UNLP | 2023 - Presente</div>
+            </div>
+            
+            <div class="card fade-in">
+                <h3>Curso de Asistente de Estudios Jurídicos y Notariales</h3>
+                <div class="institution">IPFL</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiencia y Proyectos -->
+    <section id="experiencia">
+        <h2 class="section-title fade-in">Experiencia y Proyectos</h2>
+        <div class="timeline">
+            <div class="card fade-in">
+                <h3>Proceso de Selección - Concurso N° 415</h3>
+                <div class="institution">Ministerio Público Fiscal de La Plata</div>
+            </div>
+
+            <div class="card fade-in">
+                <h3>Gestión Operativa y Atención al Público</h3>
+                <div class="institution">Sector Privado</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    <section id="habilidades">
+        <h2 class="section-title fade-in">Habilidades</h2>
+        <div class="skills-container fade-in">
+            <div class="skill-tag">Informática e Inteligencia Artificial</div>
+            <div class="skill-tag">Derecho Procesal (CPPF) y Código Civil y Comercial</div>
+            <div class="skill-tag">Herramientas de Productividad (Notion, Google Workspace)</div>
+            <div class="skill-tag">Redacción Jurídica y Formal</div>
+            <div class="skill-tag">Inglés en desarrollo</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>cristianromano544@gmail.com</p>
+    </footer>
+
+    <!-- JavaScript para interactividad -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Animación de aparición al hacer scroll (Fade-in)
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Scroll suave para los enlaces del menú
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
